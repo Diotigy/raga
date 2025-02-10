@@ -1,0 +1,134 @@
+ [
+  {
+    
+    "img": "/webTech/FSD/asset/img/BreakingBad.jpg",
+    "title": "Breaking Bad",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/AlienRomulus.jpg",
+    "title": "AlienRomulus",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/BetterCallSaul.jpg",
+    "title": "Better Call Saul",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/Chernobyl.jpg",
+    "title": "Chernobyl",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/Cosmos.jpg",
+    "title": "Cosmos",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/DeathNote.jpg",
+    "title": "DeathNote",
+    "language": "Japanese"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/ForestGump.jpg",
+    "title": "Forest Gump",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/Friends.jpg",
+    "title": "Friends",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/GameOfThrones.jpg",
+    "title": "Game Of Thrones",
+    "language": "English",
+    "genre": ""
+  },
+  {
+    "img": "/webTech/FSD/asset/img/GoodFellas.jpg",
+    "title": "Good Fellas",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/GravityFalls.jpg",
+    "title": "Gravity Falls",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/HunterXHunter.jpg",
+    "title": "Hunter X Hunter ",
+    "language": "Japanese"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/Inception.jpg",
+    "title": "Inception",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/Interstellar.jpg",
+    "title": "Interstellar",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/LordOfTheRings.jpg",
+    "title": "Lord Of The Rings",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/Matrix.jpg",
+    "title": "Matrix",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/PulpFiction.jpg",
+    "title": "Pulp Fiction",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/SchindlersList.jpg",
+    "title": "Schindler's List",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/Seven.jpg",
+    "title": "Seven",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/ShawshankRedemption.jpg",
+    "title": "Shawshank Redemption",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/Smile2.jpg",
+    "title": "Smile 2",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/Terminator2.jpg",
+    "title": "Terminator 2",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/TheDarkKnight.jpg",
+    "title": "The Dark Knight",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/TheGodFather.jpg",
+    "title": "The God Father",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/TheOffice.jpg",
+    "title": "The Office",
+    "language": "English"
+  },
+  {
+    "img": "/webTech/FSD/asset/img/TheSubstance.jpg",
+    "title": "The Substance",
+    "language": "English"
+  }
+]
