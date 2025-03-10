@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Player</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .play-icon {
+            font-size: 80px;
+            cursor: pointer;
+            color: #ff6347;
+            transition: transform 0.3s;
+        }
+
+        .play-icon:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1 id="movieTitle"></h1>
+    <a href="#"><span class="play-icon">▶️</span></a>
+
+    <script>
+        function getQueryParameter(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        document.getElementById('movieTitle').textContent = getQueryParameter('title') || "Unknown Movie";
+    </script>
+</body>
+</html>

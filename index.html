@@ -1,26 +1,185 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>OTT Website</title>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-	<link rel="stylesheet" href="/style/index.css">
 </head>
+<style>
+	body {
+			margin: 0;
+			font-family: Arial, sans-serif;
+			background-color: #121212;
+			color: #ffffff;
+		}
+
+		.nav {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10px 20px;
+			background: rgba(5, 5, 5, 0.1);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+			backdrop-filter: blur(10px);
+			border-radius: 10px;
+			margin-bottom: 20px;
+		}
+
+		.container a{
+			margin: 20px 0 0 0;
+
+		}
+
+		#search {
+			vertical-align: top;
+		}
+
+		.logo img {
+			height: 60px;
+		}
+		.navbar-list {
+			list-style: none;
+			display: flex;
+			gap: 20px;
+		}
+
+		.navbar-list li {
+			display: inline;
+      margin-right:300px;
+		}
+
+		.navbar-list a {
+			text-decoration: none;
+			color: #ffffff;
+			font-size: 18px;
+			transition: color 0.3s;
+		}
+
+		.navbar-list a:hover {
+			color: #ff6347;
+		}
+
+		input{
+			background-color: #1e1e1e;
+			border:none;
+			width:200px;
+			height:40px;
+			border-radius: 20px;
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+			font-size: larger;
+		}
+
+
+	
+		.profile-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: opacity 0.3s;
+    }
+
+    .profile-icon:hover {
+        opacity: 0.8;
+    }
+
+		.container {
+			padding: 20px;
+		}
+
+		.movie-tile {
+			display: inline-block;
+			margin: 15px;
+			width: 200px;
+			border-radius: 15px;
+			background-color: #1e1e1e;
+			overflow: hidden;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+			transition: transform 0.3s;
+		}
+
+
+		.movie-tile:hover {
+			transform: scale(1.05);
+		}
+
+		.movie-img {
+			width: 100%;
+			height: auto;
+		}
+
+		.movie-info {
+			padding: 10px;
+			text-align: center;
+		}
+
+		.movie-title {
+			font-size: 1.2em;
+			margin: 10px 0;
+		}
+
+		.movie-language {
+			font-size: 0.9em;
+			color: #bbbbbb;
+		}
+
+		#location {
+			margin-top: 2000px;
+			font-size: 1em;
+			color: #888;
+		}
+
+
+		#map {
+			height: 400px;
+			width: 400px;
+			margin: 10px 0 0;
+			border-radius: 10px;
+		}
+
+
+		footer {
+			position: relative;
+			background: #1a1a1a;
+			height: 150px;
+			overflow: hidden;
+		}
+
+		#footerCanvas {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		footer .footer-content {
+			position: relative;
+			z-index: 1;
+			text-align: center;
+			color: #ffffff;
+			padding: 20px 0;
+		}
+
+		footer .footer-content p {
+			font-size: 1em;
+		}
+</style>
 <body>
 	<div class="container">
 		<nav class="nav">
 			<div class="logo">
-				<a href="indexnew.html"><img src="/webTech/FSD/asset/icon/logo.png" alt="Logo"></a>
+				<a href="index.html"><img src="/asset/icon/logo.png" alt="Logo"></a>
 			</div>
 			<ul class="navbar-list">
 				<li><a href="#movies">MOVIES</a></li>
 				<li><a href="#tvshows">TV SHOWS</a></li>
-				<li><a href="#search"><i class="search-icon">🔍</i></a></li>
+				<input type="text" id="search" placeholder="search">
 			</ul>
-		</nav>
+			<a href="profile.html">
+        <img id="profile" src="/asset/icon/profile.svg" alt="Profile" class="profile-icon">
+    </a>
 		</nav>
 		<div id="movies">
 			<!-- Movie tiles will be dynamically added here -->
@@ -36,8 +195,237 @@
 			<p>© 2024 OTT Website. All rights reserved.</p>
 		</div>
 	</footer>
-	<script src ="index.js"></script>
-	<script src="ajax.js"></script>
+	<script> 
+		const movies = [
+			{
+				
+				img: "/asset/img/BreakingBad.jpg",
+				title: "Breaking Bad",
+				language: "English",
+			},
+			{
+				img: "/asset/img/AlienRomulus.jpg",
+				title: "AlienRomulus",
+				language: "English",
+			},
+			{
+				img: "/asset/img/BetterCallSaul.jpg",
+				title: "Better Call Saul",
+				language: "English",
+			},
+			{
+				img: "/asset/img/Chernobyl.jpg",
+				title: "Chernobyl",
+				language: "English"
+			},
+			{
+				img: "/asset/img/Cosmos.jpg",
+				title: "Cosmos",
+				language: "English"
+			},
+			{
+				img: "/asset/img/DeathNote.jpg",
+				title: "DeathNote",
+				language: "Japanese"
+			},
+			{
+				img: "/asset/img/ForestGump.jpg",
+				title: "Forest Gump",
+				language: "English"
+			},
+			{
+				img: "/asset/img/Friends.jpg",
+				title: "Friends",
+				language: "English"
+			},
+			{
+				img: "/asset/img/GameOfThrones.jpg",
+				title: "Game Of Thrones",
+				language: "English",
+				genre: ""
+			},
+			{
+				img: "/asset/img/GoodFellas.jpg",
+				title: "Good Fellas",
+				language: "English"
+			},
+			{
+				img: "/asset/img/GravityFalls.jpg",
+				title: "Gravity Falls",
+				language: "English"
+			},
+			{
+				img: "/asset/img/HunterXHunter.jpg",
+				title: "Hunter X Hunter ",
+				language: "Japanese"
+			},
+			{
+				img: "/asset/img/Inception.jpg",
+				title: "Inception",
+				language: "English"
+			},
+			{
+				img: "/asset/img/Interstellar.jpg",
+				title: "Interstellar",
+				language: "English"
+			},
+			{
+				img: "/asset/img/LordOfTheRings.jpg",
+				title: "Lord Of The Rings",
+				language: "English"
+			},
+			{
+				img: "/asset/img/Matrix.jpg",
+				title: "Matrix",
+				language: "English"
+			},
+			{
+				img: "/asset/img/PulpFiction.jpg",
+				title: "Pulp Fiction",
+				language: "English"
+			},
+			{
+				img: "/asset/img/SchindlersList.jpg",
+				title: "Schindler's List",
+				language: "English"
+			},
+			{
+				img: "/asset/img/Seven.jpg",
+				title: "Seven",
+				language: "English"
+			},
+			{
+				img: "/asset/img/ShawshankRedemption.jpg",
+				title: "Shawshank Redemption",
+				language: "English"
+			},
+			{
+				img: "/asset/img/Smile2.jpg",
+				title: "Smile 2",
+				language: "English"
+			},
+			{
+				img: "/asset/img/Terminator2.jpg",
+				title: "Terminator 2",
+				language: "English"
+			},
+			{
+				img: "/asset/img/TheDarkKnight.jpg",
+				title: "The Dark Knight",
+				language: "English"
+			},
+			{
+				img: "/asset/img/TheGodFather.jpg",
+				title: "The God Father",
+				language: "English"
+			},
+			{
+				img: "/asset/img/TheOffice.jpg",
+				title: "The Office",
+				language: "English"
+			},
+			{
+				img: "/asset/img/TheSubstance.jpg",
+				title: "The Substance",
+				language: "English"
+			}
+		];
+
+		function addMoviesSortedByLanguage(movies) {
+    const moviesContainer = document.getElementById('movies');
+    moviesContainer.innerHTML = '';
+
+    const groupedMovies = movies.reduce((groups, movie) => {
+        groups[movie.language] = groups[movie.language] || [];
+        groups[movie.language].push(movie);
+        return groups;
+    }, {});
+
+    Object.keys(groupedMovies).sort().forEach(language => {
+        const languageHeader = document.createElement('h2');
+        languageHeader.textContent = language;
+        languageHeader.style.color = '#f4f4f4';
+        moviesContainer.appendChild(languageHeader);
+
+        groupedMovies[language].forEach(movie => {
+            const movieTile = document.createElement('div');
+            movieTile.className = 'movie-tile';
+
+            const movieImg = document.createElement('img');
+            movieImg.src = movie.img;
+            movieImg.alt = movie.title;
+            movieImg.className = 'movie-img';
+
+            const movieInfo = document.createElement('div');
+            movieInfo.className = 'movie-info';
+
+            const movieTitle = document.createElement('a');
+            movieTitle.className = 'movie-title';
+            movieTitle.textContent = movie.title;
+            movieTitle.href = `movie.html?title=${encodeURIComponent(movie.title)}`;
+            movieTitle.style.textDecoration = 'none';
+            movieTitle.style.color = '#ffffff';
+            movieTitle.style.cursor = 'pointer';
+
+            const movieLanguage = document.createElement('div');
+            movieLanguage.className = 'movie-language';
+            movieLanguage.textContent = movie.language;
+
+            movieInfo.appendChild(movieTitle);
+            movieInfo.appendChild(movieLanguage);
+            movieTile.appendChild(movieImg);
+            movieTile.appendChild(movieInfo);
+            moviesContainer.appendChild(movieTile);
+        });
+    });
+}
+
+
+		// function fetchLocation() {
+		//     // Demo location coordinates
+		//     const demoLocation = { latitude: 12.9716, longitude: 77.5946 }; // Example: Bangalore, India
+
+		//     const locationElement = document.getElementById('location');
+		//     const { latitude, longitude } = demoLocation;
+
+		//     if (latitude >= 0 && longitude >= 0) { // Replace with your actual home/college logic
+		//         locationElement.textContent = 'You are at Home (Demo Location)';
+		//     } else {
+		//         locationElement.textContent = 'You are at College (Demo Location)';
+		//     }
+
+		function initMap(latitude, longitude) {
+			const map = L.map('map').setView([latitude, longitude], 13);
+
+			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 19,
+			}).addTo(map);
+
+			L.marker([latitude, longitude]).addTo(map)
+				.bindPopup('You are here!')
+				.openPopup();
+		}
+
+		function fetchLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation.watchPosition(position => {
+					const { latitude, longitude } = position.coords;
+					document.getElementById('location').textContent = `Your current location: (${latitude.toFixed(4)}, ${longitude.toFixed(4)})`;
+
+					initMap(latitude, longitude);
+				}, error => {
+					document.getElementById('location').textContent = 'Unable to retrieve your location.';
+				});
+			} else {
+				document.getElementById('location').textContent = 'Geolocation is not supported by this browser.';
+			}
+		}
+
+		addMoviesSortedByLanguage(movies);
+		fetchLocation();
+		addMoviesSortedByLanguage(movies);
+
+	</script>
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

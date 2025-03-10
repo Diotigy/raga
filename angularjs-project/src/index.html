@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ottApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTT Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app/app.module.js"></script>
+    <script src="app/app.controller.js"></script>
+    <script src="app/app.component.js"></script>
+</head>
+<body ng-controller="MainController as mainCtrl">
+    <div class="container">
+        <nav class="nav">
+            <div class="logo">
+                <a href="index.html"><img src="assets/img/logo.png" alt="Logo"></a>
+            </div>
+            <ul class="navbar-list">
+                <li><a href="#movies">MOVIES</a></li>
+                <li><a href="#tvshows">TV SHOWS</a></li>
+                <li><a href="#search"><i class="search-icon">🔍</i></a></li>
+            </ul>
+            <a href="profile.html">
+                <img src="assets/img/profile-icon.png" alt="Profile" class="profile-icon">
+            </a>
+        </nav>
+        <div id="movies" ng-repeat="(language, movies) in mainCtrl.groupedMovies">
+            <h2 style="color: #f4f4f4;">{{ language }}</h2>
+            <div class="movie-tile" ng-repeat="movie in movies">
+                <img ng-src="{{ movie.img }}" alt="{{ movie.title }}" class="movie-img">
+                <div class="movie-info">
+                    <a class="movie-title" ng-href="movie.html?title={{ movie.title }}">{{ movie.title }}</a>
+                    <div class="movie-language">{{ movie.language }}</div>
+                </div>
+            </div>
+        </div>
+        <div id="location">{{ mainCtrl.locationMessage }}</div>
+        <div id="map"></div>
+    </div>
+    <footer>
+        <canvas id="footerCanvas"></canvas>
+        <div class="footer-content">
+            <p>© 2024 OTT Website. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        angular.element(document).ready(function() {
+            angular.bootstrap(document, ['ottApp']);
+        });
+    </script>
+</body>
+</html>

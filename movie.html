@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Player</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .movie-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            background: linear-gradient(180deg, rgba(18,18,18,1) 0%, rgba(30,30,30,1) 100%);
+        }
+
+        .movie-backdrop {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+        }
+
+        .movie-backdrop::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(18,18,18,1) 0%, rgba(18,18,18,0.8) 50%, rgba(18,18,18,0.5) 100%);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .play-circle {
+            width: 120px;
+            height: 120px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .play-circle:hover {
+            transform: scale(1.1);
+            background: rgba(255,99,71,0.2);
+            border-color: #ff6347;
+        }
+
+        .play-icon {
+            font-size: 3rem;
+            color: #ff6347;
+            margin-left: 0.5rem;
+        }
+
+        .movie-info {
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .movie-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 768px) {
+            .movie-backdrop {
+                height: 40vh;
+            }
+            
+            .play-circle {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .movie-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const movies = [
+			{
+				
+				img: "/asset/img/BreakingBad.jpg",
+				title: "Breaking Bad",
+				language: "English",
+			},
+			{
+				img: "/asset/img/AlienRomulus.jpg",
+				title: "AlienRomulus",
+				language: "English",
+			},
+			{
+				img: "/asset/img/BetterCallSaul.jpg",
+				title: "Better Call Saul",
+				language: "English",
+			},
+			{
+				img: "/asset/img/Chernobyl.jpg",
+				title: "Chernobyl",
+				language: "English"
+			},
+			{
+				img: "/asset/img/Cosmos.jpg",
+				title: "Cosmos",
+				language: "English"
+			},
+			{
+				img: "/asset/img/DeathNote.jpg",
+				title: "DeathNote",
+				language: "Japanese"
+			},
+			{
+				img: "/asset/img/ForestGump.jpg",
+				title: "Forest Gump",
+				language: "English"
+			},
+			{
+				img: "/asset/img/Friends.jpg",
+				title: "Friends",
+				language: "English"
+			},
+			{
+				img: "/asset/img/GameOfThrones.jpg",
+				title: "Game Of Thrones",
+				language: "English",
+				genre: ""
+			},
+			{
+				img: "/asset/img/GoodFellas.jpg",
+				title: "Good Fellas",
+				language: "English"
+			},
+			{
+				img: "/asset/img/GravityFalls.jpg",
+				title: "Gravity Falls",
+				language: "English"
+			},
+			{
+				img: "/asset/img/HunterXHunter.jpg",
+				title: "Hunter X Hunter ",
+				language: "Japanese"
+			},
+			{
+				img: "/asset/img/Inception.jpg",
+				title: "Inception",
+				language: "English"
+			},
+			{
+				img: "/asset/img/Interstellar.jpg",
+				title: "Interstellar",
+				language: "English"
+			},
+			{
+				img: "/asset/img/LordOfTheRings.jpg",
+				title: "Lord Of The Rings",
+				language: "English"
+			},
+			{
+				img: "/asset/img/Matrix.jpg",
+				title: "Matrix",
+				language: "English"
+			},
+			{
+				img: "/asset/img/PulpFiction.jpg",
+				title: "Pulp Fiction",
+				language: "English"
+			},
+			{
+				img: "/asset/img/SchindlersList.jpg",
+				title: "Schindler's List",
+				language: "English"
+			},
+			{
+				img: "/asset/img/Seven.jpg",
+				title: "Seven",
+				language: "English"
+			},
+			{
+				img: "/asset/img/ShawshankRedemption.jpg",
+				title: "Shawshank Redemption",
+				language: "English"
+			},
+			{
+				img: "/asset/img/Smile2.jpg",
+				title: "Smile 2",
+				language: "English"
+			},
+			{
+				img: "/asset/img/Terminator2.jpg",
+				title: "Terminator 2",
+				language: "English"
+			},
+			{
+				img: "/asset/img/TheDarkKnight.jpg",
+				title: "The Dark Knight",
+				language: "English"
+			},
+			{
+				img: "/asset/img/TheGodFather.jpg",
+				title: "The God Father",
+				language: "English"
+			},
+			{
+				img: "/asset/img/TheOffice.jpg",
+				title: "The Office",
+				language: "English"
+			},
+			{
+				img: "/asset/img/TheSubstance.jpg",
+				title: "The Substance",
+				language: "English"
+			}
+		];
+
+        function MoviePlayer() {
+            const [movie, setMovie] = React.useState(null);
+						const [language, setLanguage] = React.useState(null);
+            const [isHovered, setIsHovered] = React.useState(false);
+
+            React.useEffect(() => {
+                const params = new URLSearchParams(window.location.search);
+                const title = params.get('title');
+                const foundMovie = movies.find(m => m.title === title);
+								const language = movies.find(m => m.language === language);
+								movies.forEach(movie => {
+									if(title === movie.title) {
+										setMovie(movie.title);
+										setLanguage(movie.language);
+									}
+								});
+            }, []);
+
+            if (!movie) return <div className="movie-container">Loading...</div>;
+
+            return (
+                <div className="movie-container">
+                    <div 
+                        className="movie-backdrop"
+                        style={{ backgroundImage: `url(${movie.img})` }}
+                    >
+                        <div 
+                            className="play-button"
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                            onClick={() => logData(movie, language)}
+                        >
+                            <div className="play-circle">
+                                <div className="play-icon">▶</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="movie-info">
+                        <h1 className="movie-title">{movie.title}</h1>
+                        <p>Language: {movie.language}</p>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<MoviePlayer />, document.getElementById('root'));
+
+				async function logData(title, language) {
+    const request = new Request("http://localhost:5001/api/send-info", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ 
+            title: title, 
+            language: language, 
+        }),
+    });
+
+    try {
+        const response = await fetch(request);
+        console.log("Status:", response.status);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Response Data:", data);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+
+
+    </script>
+</body>
+</html>
